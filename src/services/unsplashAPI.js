@@ -5,14 +5,14 @@ const axios = Axios.create({
 });
 
 export const fetchImages = async (query, page = 1) => {
-  const res = await axios.get("/photos", {
+  const response = await axios.get("/search/photos", {
     params: {
       client_id: "Po1kpKaZuBVBPrRi4iVbBKdTRagW4PKMi69IknKsRuY",
       query,
-      orientation: "horizontal",
+      orientation: "landscape",
       page,
-      per_page: 15,
+      per_page: 20,
     },
   });
-  return res.data;
+  return response.data;
 };
