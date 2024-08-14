@@ -1,6 +1,6 @@
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./ImageGallery/ImageGallery";
-import { fetchImages } from "./services/UnsplashAPI";
+import { fetchImages } from "./services/serviceAPI";
 import { useEffect, useState } from "react";
 
 const App = () => {
