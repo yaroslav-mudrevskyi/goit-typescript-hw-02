@@ -1,5 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import s from "./SearchBar.module.css";
 
 const SearchBar = ({ onSubmit }) => {
   const initialValues = {
@@ -25,16 +26,19 @@ const SearchBar = ({ onSubmit }) => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
+        <Form className={s.form}>
           <Field
+            className={s.input}
             name="search"
-            autocomplete="off"
+            autoComplete="off"
             type="text"
-            autofocus
+            autoFocus
             placeholder="Search images and photos"
           />
           <ErrorMessage name="search" component="div" />
-          <button type="submit">Search</button>
+          <button className={s.btn} type="submit">
+            Search
+          </button>
         </Form>
       </Formik>
     </header>
