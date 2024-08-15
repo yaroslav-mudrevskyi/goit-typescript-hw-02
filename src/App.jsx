@@ -32,8 +32,7 @@ const App = () => {
         setImages((prev) => [...prev, ...res.results]);
         setShowLoadMore(page < res.total_pages);
       } catch (error) {
-        setIsError(true);
-        throw new Error(error.status);
+        setIsError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -55,7 +54,6 @@ const App = () => {
   };
 
   const handleOpenModal = (image) => {
-    console.log(image);
     setModalImage(image);
 
     setOpenModal(true);
@@ -85,7 +83,7 @@ const App = () => {
       {isLoading && <Loader />}
       {isError && (
         <ErrorMessage
-          title={"Something went wrong. Please, try again later!"}
+          title={`Something went wrong. Please, try again later! ${isError}`}
         />
       )}
     </>

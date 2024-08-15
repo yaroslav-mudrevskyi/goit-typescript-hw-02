@@ -2,19 +2,26 @@
   display: block;
   margin: 12px auto;
   padding: 10px 20px;
-  border: 1px solid #e8fd2f;
+  border: transparent;
   border-radius: 24px;
   color: #191815;
   text-shadow: #fc0 1px 0 10px;
+  box-shadow: rgb(142, 14, 61) 0px 20px 30px -10px;
   transition: all 0.3s ease;
+  background: rgb(242, 145, 25);
+  background: linear-gradient(
+    90deg,
+    rgba(242, 145, 25, 0.9836309523809523) 0%,
+    rgba(245, 95, 79, 0.8127626050420168) 50%,
+    rgba(242, 145, 25, 1) 100%
+  );
   &:hover {
     color: #ecf0c5;
-    border: 1px solid #eef6a5;
-    background: rgb(229, 236, 115);
-    background: linear-gradient(
-      0deg,
-      rgba(229, 236, 115, 0.6979166666666667) 0%,
-      rgba(253, 187, 45, 0.7091211484593838) 100%
+    background: rgb(238, 174, 202);
+    background: radial-gradient(
+      circle,
+      rgba(238, 174, 202, 1) 0%,
+      rgba(148, 187, 233, 1) 100%
     );
   }
 }
