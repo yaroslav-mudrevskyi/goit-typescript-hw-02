@@ -17,11 +17,12 @@
   );
   &:hover {
     color: #ecf0c5;
-    background: rgb(238, 174, 202);
-    background: radial-gradient(
-      circle,
-      rgba(238, 174, 202, 1) 0%,
-      rgba(148, 187, 233, 1) 100%
+    background: rgb(232, 180, 117);
+    background: linear-gradient(
+      90deg,
+      rgba(247, 193, 128, 0.984) 0%,
+      rgba(232, 179, 118, 0.813) 50%,
+      rgb(239, 187, 123) 100%
     );
   }
 }
