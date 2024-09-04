@@ -34,7 +34,6 @@ export const fetchImages = async (
       per_page: 20,
     },
   });
-  console.log(response.data);
 
   return response.data;
 };
