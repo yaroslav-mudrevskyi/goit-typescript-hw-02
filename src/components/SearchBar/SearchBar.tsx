@@ -1,16 +1,32 @@
+import React from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import s from "./SearchBar.module.css";
 
-const SearchBar = ({ onSubmit }) => {
+interface SearchBar {
+  onSubmit: (search: string) => void;
+}
+
+interface Values {
+  search: string;
+}
+
+// interface Options {
+//   resetForm: () => void;
+// }
+
+const SearchBar: React.FC<SearchBar> = ({ onSubmit }) => {
   const initialValues = {
     search: "",
   };
 
-  const handleSubmit = (values, options) => {
+  const handleSubmit = (
+    values: Values,
+    formikHelpers: FormikHelpers<Values>
+  ): void | Promise<string> => {
     if (values.search.trim() === "") {
-      return toast.error("Enter some query, please!", {
+      toast.error("Enter some query, please!", {
         duration: 3000,
         position: "top-right",
         style: {
@@ -22,7 +38,7 @@ const SearchBar = ({ onSubmit }) => {
       });
     }
     onSubmit(values.search);
-    options.resetForm();
+    formikHelpers.resetForm();
   };
 
   const validationSchema = Yup.object().shape({

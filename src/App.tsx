@@ -1,22 +1,31 @@
-import SearchBar from "./components/SearchBar/SearchBar";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import { fetchImages } from "./services/serviceAPI";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loader from "./components/Loader/Loader";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import SearchBar from "./components/SearchBar/SearchBar";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
+import { fetchImages } from "./services/serviceAPI";
+import { PhotoData } from "./services/serviceAPI";
 
-const App = () => {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [images, setImages] = useState([]);
-  const [showLoadMore, setShowLoadMore] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-  const [modalImage, setModalImage] = useState({});
+export interface Modal {
+  alt_description: string;
+  url: string;
+}
+
+const App: React.FC = () => {
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [images, setImages] = useState<PhotoData[]>([]);
+  const [showLoadMore, setShowLoadMore] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalImage, setModalImage] = useState<Modal>({
+    url: "",
+    alt_description: "",
+  });
 
   useEffect(() => {
     if (!query) return;
@@ -32,7 +41,7 @@ const App = () => {
         setImages((prev) => [...prev, ...res.results]);
         setShowLoadMore(page < res.total_pages);
       } catch (error) {
-        setIsError(error.message);
+        setIsError(true);
       } finally {
         setIsLoading(false);
       }
@@ -40,7 +49,7 @@ const App = () => {
     fetchData();
   }, [query, page]);
 
-  const handleSearchSubmit = (value) => {
+  const handleSearchSubmit = (value: string): void => {
     setQuery(value);
     setPage(1);
     setImages([]);
@@ -49,19 +58,22 @@ const App = () => {
     setIsEmpty(false);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (): void => {
     setPage((prev) => prev + 1);
   };
 
-  const handleOpenModal = (image) => {
+  const handleOpenModal = (image: Modal): void => {
     setModalImage(image);
 
     setOpenModal(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setOpenModal(false);
-    setModalImage({});
+    setModalImage({
+      url: "",
+      alt_description: "",
+    });
   };
 
   return (
